@@ -25,6 +25,7 @@ func main() {
 		},
 	}
 	fmt.Print("2 \n")
+	// Note that you can't reuse a database in gcloud for about a week or so ?
 	op, err := sqlAdmin.Instances.Clone("gke-verification", "opssight-4-7-2018-06-06-19-23-34", cr).Do()
 	if err != nil {
 		fmt.Println(fmt.Printf("%v", err))
