@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"time"
 
 	"golang.org/x/net/context"
@@ -25,7 +26,12 @@ func main() {
 	}
 	fmt.Print("2 \n")
 	op, err := sqlAdmin.Instances.Clone("gke-verification", "opssight-4-7-2018-06-06-19-23-34", cr).Do()
+	if err != nil {
+		fmt.Println(fmt.Printf("%v", err))
+		os.Exit(2)
+	}
 	for {
+		fmt.Println("...now getting!")
 		inst, err := sqlAdmin.Instances.Get("gke-verification", "cloned-big").Do()
 		fmt.Print(fmt.Sprintf("%v %v", op, err))
 		fmt.Print(fmt.Sprintf("instance: %v , disk: %v", inst.State, inst.CurrentDiskSize))
